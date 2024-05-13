@@ -19,32 +19,28 @@ import { useState,useRef } from "react";
 import { Link,useNavigate } from "react-router-dom";
 // import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
-
 // @mui material components
-import Card from "@mui/material/Card";
-import Checkbox from "@mui/material/Checkbox";
+import Switch from "@mui/material/Switch";
 
 // Soft UI Dashboard PRO React components
 import SoftBox from "components/SoftBox";
 import SoftTypography from "components/SoftTypography";
 import SoftInput from "components/SoftInput";
 import SoftButton from "components/SoftButton";
-
-// Authentication layout components
-import BasicLayout from "layouts/authentication/components/BasicLayout";
-import Socials from "layouts/authentication/components/Socials";
-import Separator from "layouts/authentication/components/Separator";
 import {login} from  "assets/globalAPI";
 import { ToastContainer, toast } from "react-toastify";
 import Swal from 'sweetalert2';
+import Card from "@mui/material/Card";
 
 
+// Authentication layout components
+import IllustrationLayout from "layouts/authentication/components/IllustrationLayout";
 
+// Image
+import chat from "assets/images/illustrations/rocket-white.png";
 
-// Images
-import curved6 from "assets/images/curved-images/curved-61.jpg";
-
-function Basic() {
+function Illustration() {
+  const [rememberMe, setRememberMe] = useState(false);
   const [agreement, setAgremment] = useState(true);
   const toastId = useRef(null);
   const MySwal = withReactContent(Swal);
@@ -53,6 +49,8 @@ function Basic() {
   const navigate = useNavigate();
   const [loader, setLoader] = useState(false);
 
+
+  // const handleSetRememberMe = () => setRememberMe(!rememberMe);
   const handleSetAgremment = () => setAgremment(!agreement);
   const handleUsernameChange = (event) => {
 
@@ -117,42 +115,21 @@ function Basic() {
           confirmButtonText: 'OK'
         });
       }
-      // var response=await login(data)
-      // console.log("user details",response.data);
-
-    //   authUserRegistration(JSON.stringify(data))
-    //     .then(
-    //       function (response) {
-    //         var res = response.data;
-    //         console.log(res);
-    //         if (res.status == "true" && res.code == "200") {
-    //           MySwal.fire({
-    //             title: <strong>Success</strong>,
-    //             html: <i>User Created successfully!</i>,
-    //             icon: "success",
-    //           }).then(() => {
-    //             window.location.reload();
-    //           });
-    //         } else {
-    //         }
-    //       }.bind(this)
-    //     )
-    //     .catch(function (error) {
-    //       setLoader(false);
-    //       console.log(error);
-    //     });
     }
-  };
+  }
 
   return (
-  
-    <BasicLayout
-      title="Welcome!"
-      description="Use these awesome forms to login or create new account in your project for free."
-      image={curved6}
+    <IllustrationLayout
+      title="Sign In"
+      description="Enter your email and password to sign in"
+      illustration={{
+        image: chat,
+        title: '"Attention is the new currency"',
+        description:
+          "The more effortless the writing looks, the more effort the writer actually put into the process.",
+      }}
     >
-    
-      <Card>
+     <Card>
         <SoftBox pt={2} pb={3} px={3} >
         <SoftTypography>Login</SoftTypography>
           {/* <SoftBox component="form" role="form"> */}
@@ -187,10 +164,8 @@ function Basic() {
           {/* </SoftBox> */}
         </SoftBox>
       </Card>
-    </BasicLayout>
+    </IllustrationLayout>
   );
 }
 
-
-
-export default Basic;
+export default Illustration;
