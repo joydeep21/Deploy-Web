@@ -1,0 +1,120 @@
+.MuiPaper-root {
+  z-index: 1 !important;
+}
+.css-y9gdep-MuiInputBase-root {
+  width: 100px !important;
+}
+.dateIn {
+  border-radius: 10px;
+  width: 100%;
+  height: 50px;
+}
+.backbox {
+  box-shadow: rgb(119, 119, 119) 0px 3px 10px !important;
+}
+
+/* &:hover {
+    transform: perspective(800px) rotateY(-4deg);
+  } */
+
+.maindiv {
+  background-image: url("../src/assets/images/curved-images/background-portal-v-03.jpg");
+}
+.loginimg {
+  background-image: url("../src/assets/images/curved-images/log-in-ifb-image.jpg");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  box-shadow: rgb(119, 119, 119) 0px 3px 10px !important;
+}
+.logoimg {
+  size: 200%;
+  margin-top: -150px !important;
+  margin-left: -100px !important;
+  /* height: 20%;
+  max-width: 200%; */
+}
+
+.logimg {
+  size: 250%;
+  width: 40%;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+.css-1y936z7-MuiDrawer-docked .MuiDrawer-paper {
+  z-index: 2 !important;
+}
+.userCreateCard {
+  z-index: 0 !important;
+}
+.loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Translucent black background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* Ensure the loading screen appears on top */
+  color: white;
+  font-size: 1.5rem;
+}
+.inp {
+  width: 120px;
+  border-radius: 5px;
+  border: none;
+  box-shadow: 0px 2px 4px grey;
+  height: 35px;
+  padding-left: 5px;
+  margin: 5px;
+}
+.btn1 {
+  width: 75px;
+  border: none;
+  background-color: #066bfb;
+  border-radius: 5px;
+  color: white;
+  margin: 5px;
+  height: 35px;
+  box-shadow: 0px 2px 4px grey;
+  font-size: 13px;
+  font-weight: bold;
+}
+.btn1:hover {
+  background-color: #5094f3;
+}
+.regbtn {
+  border: none;
+  background-color: #42e581;
+  font-size: 14px;
+  width: 100%;
+  height: 30px;
+  border-radius: 10px;
+  padding: 5px 5px 5px 5px;
+  margin: 2px 2px 2px 2px;
+}
+.stbtn {
+  border: none;
+  background-color: #42e581;
+  font-size: 14px;
+  width: 100%;
+  height: 30px;
+  border-radius: 10px;
+  padding: 5px 5px 5px 5px;
+  margin: 2px 2px 2px 2px;
+}
+.stbtn:active {
+  background: linear-gradient(to bottom, #ffcc00 0%, #ffff66 100%) !important;
+}
+.stbtn:focus {
+  background: linear-gradient(to bottom, #ffcc00 0%, #ffff66 100%);
+}
+.regbtn:hover {
+  background: linear-gradient(to bottom, #ffcc00 0%, #ffff66 100%);
+}
+.regbtn:focus {
+  background: linear-gradient(to bottom, #ffcc00 0%, #ffff66 100%) !important;
+}
