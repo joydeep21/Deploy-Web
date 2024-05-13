@@ -34,41 +34,49 @@ import SoftButton from "components/SoftButton";
 import BasicLayout from "layouts/authentication/components/BasicLayout";
 import Socials from "layouts/authentication/components/Socials";
 import Separator from "layouts/authentication/components/Separator";
-import {login} from  "assets/globalAPI";
+// import {addAccount} from  "assets/globalAPI";
 import { ToastContainer, toast } from "react-toastify";
 import Swal from 'sweetalert2';
+import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
+import DashboardNavbar from "examples/Navbars/DashboardNavbar";
+import Footer from "examples/Footer";
 
 
 
 
 // Images
-import curved6 from "assets/images/curved-images/curved-61.jpg";
+import curved6 from "assets/images/curved-images/curved-6.jpg";
+import { transfar } from "assets/globalAPI";
+import { Mp } from "@mui/icons-material";
 
-function Basic() {
+function Transation() {
   const [agreement, setAgremment] = useState(true);
   const toastId = useRef(null);
   const MySwal = withReactContent(Swal);
-  const [userId, setUserId] = useState("");
-  const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
+  const [reciveraccount, setReciveraccount] = useState("");
+  const [senderaccount, setSenderaccount] = useState("");
+  const [mpin, setMpin] = useState("");
+  const [amount, setAmmount] = useState("");
   const navigate = useNavigate();
   const [loader, setLoader] = useState(false);
 
   const handleSetAgremment = () => setAgremment(!agreement);
-  const handleUsernameChange = (event) => {
+  // const handleUsernameChange = (event) => {
 
-    setUserId(event.target.value);
+  //   setUserId(event.target.value);
 
-  };
-  const handlePasswordChange = (event) => {
-    setPassword(event.target.value);
+  // };
+  // const handlePasswordChange = (event) => {
+  //   setPassword(event.target.value);
 
-  };
+  // };
   const handleSubmit = async (event) => {
     event.preventDefault();
     console.log("user details");
     // let userid = document.getElementById("userid").value;
     // let password = document.getElementById("password").value;
-    if (userId == "" || password == "") {
+    if (reciveraccount == "" || senderaccount == "" ||amount==""|| mpin=="") {
     console.log("user details");
     Swal.fire({
       icon: 'error',
@@ -80,40 +88,49 @@ function Basic() {
       
     } else {
       const data = {
-        accountNumber: userId,
-        mpin: password
+        senderAccountNumber:senderaccount,
+        receiverAccountNumber:reciveraccount,
+        amount:amount,
+        mpin:mpin,
+        message:message
+        
       };
       try {
         console.log("hiiii------------>>>", data);
-        const resp = await login(data);
-        console.log("vggvhgvgvh",resp.data);
+        const resp = await transfar(data);
+        console.log("hiiii------------>>>", resp);
         const res = resp.data;
         if (resp.status == 200) {
-          const token = res.token;
-          // Save token to local storage
-          console.log("token",token);
-          localStorage.setItem('token', token);
+       
+
           Swal.fire({
             icon: 'success',
-            title: "Login succesfull",
-            text: res.message,
+            title: " succesfully Added",
+            // text: res.message,
             showConfirmButton: false,
             timer: 1500
           });
+          setAmmount("");
+          setMessage("");
+          setReciveraccount("");
+          setSenderaccount("");
+          setMpin("");
           console.log("Data posted successfully===>>>>", data);
-          navigate("/Uploader/banner")
+          // navigate("/dashboards/default")
         } else {
           Swal.fire({
             icon: 'error',
-            title: 'Login failed!',
-            text: res.message,
+            title: ' failed!',
+            // text: res.message,
             confirmButtonText: 'OK'
           });
         }
       } catch (err) {
+        console.log(err,"hcdxfvcgcg");
         Swal.fire({
           icon: 'error',
-          title: 'Login failed!',
+          title: ' failed!',
+          // text: res.message,
           confirmButtonText: 'OK'
         });
       }
@@ -146,26 +163,31 @@ function Basic() {
 
   return (
   
-    <BasicLayout
-      title="Welcome!"
-      description="Use these awesome forms to login or create new account in your project for free."
-      image={curved6}
-    >
-    
+    <DashboardLayout>
+    <DashboardNavbar />
       <Card>
-        <SoftBox pt={2} pb={3} px={3} >
-        <SoftTypography>Login</SoftTypography>
+        <SoftBox pt={2} pb={3} px={3}>
+        <SoftTypography>Send Ammount</SoftTypography>
           {/* <SoftBox component="form" role="form"> */}
           <form onSubmit={handleSubmit}>
             <SoftBox mb={2}>
-              <SoftInput type="text" value={userId} onChange={handleUsernameChange} />
+              <SoftInput type="text" value={senderaccount} placeholder="SenderAccountNumber" onChange={(event)=>setSenderaccount(event.target.value)} />
             </SoftBox>
             <SoftBox mb={2}>
-              <SoftInput type="password" value={password} onChange={handlePasswordChange} />
+              <SoftInput type="text" value={reciveraccount} placeholder="ReceiverAccountNumber" onChange={(event)=> setReciveraccount(event.target.value) } />
             </SoftBox>
-            <SoftBox mt={4} mb={1}>
+            <SoftBox mb={2}>
+              <SoftInput type="number" value={amount} placeholder="Amount" onChange={(event)=> setAmmount(event.target.value)}/>
+            </SoftBox>
+            <SoftBox mb={2}>
+              <SoftInput type="password" value={mpin} placeholder="Mpin"onChange={(event)=> setMpin(event.target.value)} />
+            </SoftBox>
+            <SoftBox mb={2}>
+              <SoftInput type="text" value={message} placeholder="Message"onChange={(event)=> setMessage(event.target.value)} />
+            </SoftBox>
+            <SoftBox mt={5} mb={1}>
               <SoftButton type="submit" variant="gradient" color="dark" fullWidth>
-                sign In
+                Send Money
               </SoftButton>
             </SoftBox>
             {/* <SoftBox mt={3} textAlign="center">
@@ -187,10 +209,11 @@ function Basic() {
           {/* </SoftBox> */}
         </SoftBox>
       </Card>
-    </BasicLayout>
+      {/* <Footer /> */}
+    </DashboardLayout>
   );
 }
 
 
 
-export default Basic;
+export default Transation;

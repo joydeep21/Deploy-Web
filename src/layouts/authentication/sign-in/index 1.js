@@ -30,7 +30,7 @@ import SoftButton from "components/SoftButton";
 
 // Authentication layout components
 import CoverLayout from "layouts/authentication/components/CoverLayout";
-import { authLogin } from '../../../assets/globalAPI/GlobalApi';
+import { authLogin } from '../../../assets/globalAPI';
 // Images
 import curved9 from "assets/images/curved-images/curved-6.jpg";
 
