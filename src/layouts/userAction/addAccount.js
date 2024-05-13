@@ -34,41 +34,47 @@ import SoftButton from "components/SoftButton";
 import BasicLayout from "layouts/authentication/components/BasicLayout";
 import Socials from "layouts/authentication/components/Socials";
 import Separator from "layouts/authentication/components/Separator";
-import {login} from  "assets/globalAPI";
+// import {addAccount} from  "assets/globalAPI";
 import { ToastContainer, toast } from "react-toastify";
 import Swal from 'sweetalert2';
+import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
+import DashboardNavbar from "examples/Navbars/DashboardNavbar";
+import Footer from "examples/Footer";
 
 
 
 
 // Images
-import curved6 from "assets/images/curved-images/curved-61.jpg";
+import curved6 from "assets/images/curved-images/curved-6.jpg";
+import { addAccount } from "assets/globalAPI";
 
-function Basic() {
+function AddAccount() {
   const [agreement, setAgremment] = useState(true);
   const toastId = useRef(null);
   const MySwal = withReactContent(Swal);
-  const [userId, setUserId] = useState("");
-  const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
+  const [account, setAccount] = useState("");
+  const [type, setType] = useState("");
+  const [amount, setAmmount] = useState("");
   const navigate = useNavigate();
   const [loader, setLoader] = useState(false);
 
   const handleSetAgremment = () => setAgremment(!agreement);
-  const handleUsernameChange = (event) => {
+  // const handleUsernameChange = (event) => {
 
-    setUserId(event.target.value);
+  //   setUserId(event.target.value);
 
-  };
-  const handlePasswordChange = (event) => {
-    setPassword(event.target.value);
+  // };
+  // const handlePasswordChange = (event) => {
+  //   setPassword(event.target.value);
 
-  };
+  // };
   const handleSubmit = async (event) => {
     event.preventDefault();
     console.log("user details");
     // let userid = document.getElementById("userid").value;
     // let password = document.getElementById("password").value;
-    if (userId == "" || password == "") {
+    if (name == "" || account == "" ||type=="") {
     console.log("user details");
     Swal.fire({
       icon: 'error',
@@ -80,40 +86,46 @@ function Basic() {
       
     } else {
       const data = {
-        accountNumber: userId,
-        mpin: password
+        accountNumber:account,
+        accountHolderName:name,
+        balance:amount,
+        accountType:type
+        
       };
       try {
         console.log("hiiii------------>>>", data);
-        const resp = await login(data);
-        console.log("vggvhgvgvh",resp.data);
+        const resp = await addAccount(data);
+        console.log("errors",resp);
         const res = resp.data;
         if (resp.status == 200) {
-          const token = res.token;
-          // Save token to local storage
-          console.log("token",token);
-          localStorage.setItem('token', token);
+         
           Swal.fire({
             icon: 'success',
-            title: "Login succesfull",
+            title: " succesfully Added",
             text: res.message,
             showConfirmButton: false,
             timer: 1500
           });
+          setAmmount("");
+          setName("");
+          setAccount("");
+          setType("")
           console.log("Data posted successfully===>>>>", data);
-          navigate("/Uploader/banner")
+          // navigate("/dashboards/default")
         } else {
           Swal.fire({
             icon: 'error',
-            title: 'Login failed!',
+            title: ' failed!',
             text: res.message,
             confirmButtonText: 'OK'
           });
         }
       } catch (err) {
+        console.log("errors",err);
+
         Swal.fire({
           icon: 'error',
-          title: 'Login failed!',
+          title: ' failed!',
           confirmButtonText: 'OK'
         });
       }
@@ -146,26 +158,27 @@ function Basic() {
 
   return (
   
-    <BasicLayout
-      title="Welcome!"
-      description="Use these awesome forms to login or create new account in your project for free."
-      image={curved6}
-    >
-    
+    <DashboardLayout>
+    <DashboardNavbar />
       <Card>
-        <SoftBox pt={2} pb={3} px={3} >
-        <SoftTypography>Login</SoftTypography>
+        <SoftBox pt={2} pb={3} px={3}>
+        <SoftTypography>Add Account</SoftTypography>
           {/* <SoftBox component="form" role="form"> */}
           <form onSubmit={handleSubmit}>
             <SoftBox mb={2}>
-              <SoftInput type="text" value={userId} onChange={handleUsernameChange} />
+              <SoftInput type="text" value={account} placeholder="AccountHolderName" onChange={(event)=>setAccount(event.target.value)} />
             </SoftBox>
             <SoftBox mb={2}>
-              <SoftInput type="password" value={password} onChange={handlePasswordChange} />
+              <SoftInput type="text" value={name} placeholder="AccountNumber" onChange={(event)=> setName(event.target.value) } />
+            </SoftBox>
+            <SoftBox mb={2}>
+              <SoftInput type="text" value={amount} placeholder="Balance" onChange={(event)=> setAmmount(event.target.value)}/>
+            </SoftBox><SoftBox mb={2}>
+              <SoftInput type="text" value={type} placeholder="AccountType"onChange={(event)=> setType(event.target.value)} />
             </SoftBox>
             <SoftBox mt={4} mb={1}>
               <SoftButton type="submit" variant="gradient" color="dark" fullWidth>
-                sign In
+                ADD  ACCOUNT
               </SoftButton>
             </SoftBox>
             {/* <SoftBox mt={3} textAlign="center">
@@ -187,10 +200,11 @@ function Basic() {
           {/* </SoftBox> */}
         </SoftBox>
       </Card>
-    </BasicLayout>
+      {/* <Footer /> */}
+    </DashboardLayout>
   );
 }
 
 
 
-export default Basic;
+export default AddAccount;

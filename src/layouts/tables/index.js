@@ -38,7 +38,7 @@ import { ThreeDots } from 'react-loader-spinner'
 // Data
 import authorsTableData from "layouts/tables/data/authorsTableData";
 import projectsTableData from "layouts/tables/data/projectsTableData";
-import { authDistributionChannel, authDivision, authAccountGroup, authSalesOrganization, authPostalCodeMaster, authGeoMapping, authIndustryCode,authAccountAssignmentGroup,authCustomerCreation, authGSTNIntegration, getGSTValidation} from '../../assets/globalAPI/GlobalApi';
+import { authDistributionChannel, authDivision, authAccountGroup, authSalesOrganization, authPostalCodeMaster, authGeoMapping, authIndustryCode,authAccountAssignmentGroup,authCustomerCreation, authGSTNIntegration, getGSTValidation} from '../../assets/globalAPI';
 function Tables() {
   const MySwal = withReactContent(Swal);
   const navigate = useNavigate();

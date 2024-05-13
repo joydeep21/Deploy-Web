@@ -34,41 +34,56 @@ import SoftButton from "components/SoftButton";
 import BasicLayout from "layouts/authentication/components/BasicLayout";
 import Socials from "layouts/authentication/components/Socials";
 import Separator from "layouts/authentication/components/Separator";
-import {login} from  "assets/globalAPI";
+// import {addAccount} from  "assets/globalAPI";
 import { ToastContainer, toast } from "react-toastify";
 import Swal from 'sweetalert2';
+import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
+import DashboardNavbar from "examples/Navbars/DashboardNavbar";
+import Footer from "examples/Footer";
 
 
 
 
 // Images
-import curved6 from "assets/images/curved-images/curved-61.jpg";
+import curved6 from "assets/images/curved-images/curved-6.jpg";
+import { appLogo } from "assets/globalAPI";
+import { Mp } from "@mui/icons-material";
 
-function Basic() {
+function AppLogo() {
   const [agreement, setAgremment] = useState(true);
   const toastId = useRef(null);
   const MySwal = withReactContent(Swal);
-  const [userId, setUserId] = useState("");
-  const [password, setPassword] = useState("");
+  const [name, setName] = useState('');
+  const [rating, setRating] = useState('');
+  const [downloads, setDownloads] = useState('');
+  const [size, setSize] = useState('');
+  const [reviews, setReviews] = useState('');
+  const [description, setDescription] = useState('');
+  const [types, setTypes] = useState('');
+  const [owner, setOwner] = useState('');
+  const [selectedFile, setSelectedFile] = useState(null);
   const navigate = useNavigate();
   const [loader, setLoader] = useState(false);
-
+  
   const handleSetAgremment = () => setAgremment(!agreement);
-  const handleUsernameChange = (event) => {
-
-    setUserId(event.target.value);
-
+  const handleTypeChange = (event) => {
+    
+    var stringArray = event.target.value.split(',');
+    setTypes(stringArray);
   };
-  const handlePasswordChange = (event) => {
-    setPassword(event.target.value);
 
+ 
+  const handleFileChange = (event) => {
+    setSelectedFile(event.target.files[0]);
   };
+
+ 
   const handleSubmit = async (event) => {
     event.preventDefault();
     console.log("user details");
     // let userid = document.getElementById("userid").value;
     // let password = document.getElementById("password").value;
-    if (userId == "" || password == "") {
+    if (name == "" || rating == "" ||downloads==""||!selectedFile) {
     console.log("user details");
     Swal.fire({
       icon: 'error',
@@ -79,41 +94,46 @@ function Basic() {
 
       
     } else {
-      const data = {
-        accountNumber: userId,
-        mpin: password
-      };
+        const formData = new FormData();
+        formData.append('logo_files', selectedFile);
+        formData.append('name', name);
+        formData.append('rating', rating);
+        formData.append('downloads', downloads);
+        formData.append('reviews', reviews);
+        formData.append('description', description);
+        formData.append('types', types);
+        formData.append('owner', owner);
+
+        // name,rating,downloads,size,reviews,description,types,owner
       try {
-        console.log("hiiii------------>>>", data);
-        const resp = await login(data);
-        console.log("vggvhgvgvh",resp.data);
+        console.log("hiiii------------>>>", formData);
+        const resp = await appLogo(formData);
         const res = resp.data;
         if (resp.status == 200) {
-          const token = res.token;
-          // Save token to local storage
-          console.log("token",token);
-          localStorage.setItem('token', token);
+       
           Swal.fire({
             icon: 'success',
-            title: "Login succesfull",
+            title: " succesfully Added",
             text: res.message,
             showConfirmButton: false,
             timer: 1500
           });
-          console.log("Data posted successfully===>>>>", data);
-          navigate("/Uploader/banner")
+          console.log("Data posted successfully===>>>>");
+        //   navigate("/dashboards/default")
         } else {
           Swal.fire({
             icon: 'error',
-            title: 'Login failed!',
+            title: ' failed!',
             text: res.message,
             confirmButtonText: 'OK'
           });
         }
       } catch (err) {
+        console.log("ihgvhvvv",err);
         Swal.fire({
           icon: 'error',
-          title: 'Login failed!',
+          title: ' failed!',
+        //   text: res.message,
           confirmButtonText: 'OK'
         });
       }
@@ -146,26 +166,44 @@ function Basic() {
 
   return (
   
-    <BasicLayout
-      title="Welcome!"
-      description="Use these awesome forms to login or create new account in your project for free."
-      image={curved6}
-    >
-    
+    <DashboardLayout>
+    <DashboardNavbar />
       <Card>
-        <SoftBox pt={2} pb={3} px={3} >
-        <SoftTypography>Login</SoftTypography>
+        <SoftBox pt={2} pb={3} px={3}>
+        <SoftTypography>ADD APP</SoftTypography>
           {/* <SoftBox component="form" role="form"> */}
           <form onSubmit={handleSubmit}>
+           
             <SoftBox mb={2}>
-              <SoftInput type="text" value={userId} onChange={handleUsernameChange} />
+              <SoftInput type="text" value={name} placeholder="App Name" onChange={(event)=> setName(event.target.value) } />
             </SoftBox>
             <SoftBox mb={2}>
-              <SoftInput type="password" value={password} onChange={handlePasswordChange} />
+              <SoftInput type="text" value={rating} placeholder="Rating" onChange={(event)=> setRating(event.target.value)}/>
             </SoftBox>
-            <SoftBox mt={4} mb={1}>
+            <SoftBox mb={2}>
+              <SoftInput type="text" value={downloads} placeholder="Downlods"onChange={(event)=> setDownloads(event.target.value)} />
+            </SoftBox>
+            <SoftBox mb={2}>
+              <SoftInput type="text" value={size} placeholder="App Size" onChange={(event)=>setSize(event.target.value)} />
+            </SoftBox>
+             <SoftBox mb={2}>
+              <SoftInput type="text" value={reviews} placeholder="Reviews" onChange={(event)=>setReviews(event.target.value)} />
+            </SoftBox>
+             <SoftBox mb={2}>
+              <SoftInput type="text" value={description} placeholder="Description" onChange={(event)=>setDescription(event.target.value)} />
+            </SoftBox> 
+            <SoftBox mb={2}>
+              <SoftInput type="text" value={types} placeholder="Types" onChange={handleTypeChange} />
+            </SoftBox>
+             <SoftBox mb={2}>
+              <SoftInput type="text" value={owner} placeholder="App Owner" onChange={(event)=>setOwner(event.target.value)} />
+            </SoftBox>
+            <SoftBox mb={2}>
+              <SoftInput type="file"  placeholder="Select a File"onChange={handleFileChange} />
+            </SoftBox>
+            <SoftBox mt={5} mb={1}>
               <SoftButton type="submit" variant="gradient" color="dark" fullWidth>
-                sign In
+                ADD APP
               </SoftButton>
             </SoftBox>
             {/* <SoftBox mt={3} textAlign="center">
@@ -187,10 +225,11 @@ function Basic() {
           {/* </SoftBox> */}
         </SoftBox>
       </Card>
-    </BasicLayout>
+      {/* <Footer /> */}
+    </DashboardLayout>
   );
 }
 
 
 
-export default Basic;
+export default AppLogo;
