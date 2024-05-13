@@ -158,18 +158,18 @@ export default function App() {
         {layout === "vr" && <Configurator />}
         <Routes>
           {getRoutes(routes)}
-          <Route path="*" element={<Navigate to="/authentication/sign-in" />} />
+          <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </ThemeProvider>
     </CacheProvider>
   ) : (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      {layout === "dashboard" && pathname!=="/authentication/sign-in" && (
+      {layout === "dashboard" && pathname!=="/" && (
         <>
           <Sidenav
             color={sidenavColor}
-            brand={brand}
+            // brand={brand}
             brandName="HAD Portal"
             routes={routes}
             onMouseEnter={handleOnMouseEnter}
@@ -182,7 +182,7 @@ export default function App() {
       {layout === "vr" && <Configurator />}
       <Routes>
         {getRoutes(routes)}
-        <Route path="*" element={<Navigate to="/authentication/sign-in" />} />
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </ThemeProvider>
   );
