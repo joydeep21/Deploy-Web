@@ -30,6 +30,8 @@ import SignUpBasic from "layouts/authentication/sign-in/index"
 import Usercreation from "./layouts/authentication/components/usercreation/index";
 
 import User from "layouts/users/User";
+import TransationDelete from "layouts/action/transation";
+import DeleteLogo from "layouts/action/deletelogo";
 // useEffect(() => {
 //   setTimeout(() => {
 //     setIsLoading(false);
@@ -158,6 +160,18 @@ const routes = [
         key: "transation",
         route: "/user-Actions/transation",
         component: <Transation />,
+      },
+      {
+        name: "Delete-Transation",
+        key: "delete-transation",
+        route: "/user-Actions/delete-transation",
+        component: <TransationDelete />,
+      },
+      {
+        name: "Delete-Logo",
+        key: "delete-logo",
+        route: "/user-Actions/delete-logo",
+        component: <DeleteLogo />,
       }
     ],
   },

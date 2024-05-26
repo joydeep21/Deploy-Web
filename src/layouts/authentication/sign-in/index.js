@@ -121,7 +121,7 @@ function Illustration() {
   return (
     <IllustrationLayout
       title="Sign In"
-      description="Enter your email and password to sign in"
+      description="Enter your Account  and Mpin to sign in"
       illustration={{
         image: chat,
         title: '"Attention is the new currency"',
@@ -129,41 +129,47 @@ function Illustration() {
           "The more effortless the writing looks, the more effort the writer actually put into the process.",
       }}
     >
-     <Card>
-        <SoftBox pt={2} pb={3} px={3} >
-        <SoftTypography>Login</SoftTypography>
-          {/* <SoftBox component="form" role="form"> */}
-          <form onSubmit={handleSubmit}>
-            <SoftBox mb={2}>
-              <SoftInput type="text" value={userId} onChange={handleUsernameChange} />
-            </SoftBox>
-            <SoftBox mb={2}>
-              <SoftInput type="password" value={password} onChange={handlePasswordChange} />
-            </SoftBox>
-            <SoftBox mt={4} mb={1}>
-              <SoftButton type="submit" variant="gradient" color="dark" fullWidth>
-                sign In
-              </SoftButton>
-            </SoftBox>
-            {/* <SoftBox mt={3} textAlign="center">
-              <SoftTypography variant="button" color="text" fontWeight="regular">
-                Already have an account?&nbsp;
-                <SoftTypography
-                  component={Link}
-                  to="/authentication/sign-in/basic"
-                  variant="button"
-                  color="dark"
-                  fontWeight="bold"
-                  textGradient
-                >
-                  Sign in
-                </SoftTypography>
-              </SoftTypography>
-            </SoftBox> */}
-            </form>
-          {/* </SoftBox> */}
+      
+       <SoftBox component="form" role="form">
+        <SoftBox mb={2}>
+          <SoftInput type="text" placeholder="Account Number" size="large" value={userId} onChange={handleUsernameChange} />
         </SoftBox>
-      </Card>
+        <SoftBox mb={2}>
+          <SoftInput type="password" placeholder="Mpin" size="large"  value={password} onChange={handlePasswordChange}/>
+        </SoftBox>
+        <SoftBox display="flex" alignItems="center">
+          {/* <Switch checked={rememberMe} onChange={handleSetRememberMe} /> */}
+          <SoftTypography
+            variant="button"
+            fontWeight="regular"
+           
+            sx={{ cursor: "pointer", userSelect: "none" }}
+          >
+            &nbsp;&nbsp;Remember me
+          </SoftTypography>
+        </SoftBox>
+        <SoftBox mt={4} mb={1}>
+          <SoftButton variant="gradient" color="info" size="large" fullWidth onClick={handleSubmit}>
+            sign in
+          </SoftButton>
+        </SoftBox>
+        <SoftBox mt={3} textAlign="center">
+          <SoftTypography variant="button" color="text" fontWeight="regular">
+            Don&apos;t have an account?{" "}
+            {/* <SoftTypography
+              component={Link}
+              to="/authentication/sign-up/illustration"
+              variant="button"
+              color="info"
+              fontWeight="medium"
+              textGradient
+            >
+              Sign up
+            </SoftTypography> */}
+          </SoftTypography>
+        </SoftBox>
+      </SoftBox>
+     
     </IllustrationLayout>
   );
 }

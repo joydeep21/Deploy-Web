@@ -61,6 +61,7 @@ function AppLogo() {
   const [description, setDescription] = useState('');
   const [types, setTypes] = useState('');
   const [owner, setOwner] = useState('');
+  const [related, setRelated] = useState('');
   const [selectedFile, setSelectedFile] = useState(null);
   const navigate = useNavigate();
   const [loader, setLoader] = useState(false);
@@ -103,6 +104,7 @@ function AppLogo() {
         formData.append('description', description);
         formData.append('types', types);
         formData.append('owner', owner);
+        formData.append('related', related);
 
         // name,rating,downloads,size,reviews,description,types,owner
       try {
@@ -197,6 +199,9 @@ function AppLogo() {
             </SoftBox>
              <SoftBox mb={2}>
               <SoftInput type="text" value={owner} placeholder="App Owner" onChange={(event)=>setOwner(event.target.value)} />
+            </SoftBox>
+            <SoftBox mb={2}>
+              <SoftInput type="text" value={related} placeholder="App Algo" onChange={(event)=>setRelated(event.target.value)} />
             </SoftBox>
             <SoftBox mb={2}>
               <SoftInput type="file"  placeholder="Select a File"onChange={handleFileChange} />
