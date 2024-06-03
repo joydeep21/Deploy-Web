@@ -66,7 +66,7 @@ import { adminTransation ,adminAccount} from "assets/globalAPI";
 import { Mp } from "@mui/icons-material";
 
 function TransationDelete() {
-  const rowsPerPage=20;
+  const rowsPerPage=10;
   const [agreement, setAgremment] = useState(true);
   const toastId = useRef(null);
   
@@ -162,7 +162,6 @@ function TransationDelete() {
     <DashboardLayout>
     <DashboardNavbar />
       <Card>
-      <Paper>
       <Autocomplete
         freeSolo
         options={options.map((option) => option.accountNumber)}
@@ -172,30 +171,48 @@ function TransationDelete() {
           <TextField {...params} label="Search" variant="outlined" style={{ margin: 16 }} />
         )}
       />
-      <TableContainer>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>ID</TableCell>
-              <TableCell>Name</TableCell>
-              <TableCell>Actions</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows.map((row) => (
-              <TableRow key={row.id}>
-                <TableCell>{row.id}</TableCell>
-                <TableCell>{row.name}</TableCell>
-                <TableCell>
-                  <IconButton onClick={() => handleDelete(row.id)}>
-                    <DeleteIcon />
-                  </IconButton>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+        <SoftBox>
+          <h3 style={{ color: "skyblue" }}>Transation Table</h3>
+        </SoftBox>
+        <Card
+          style={{
+            height: "80vh",
+            width: "100%",
+            padding: "10px",
+            border: "none",
+            boxShadow: "0px 3px 4px grey",
+          }}
+        >
+          <Table striped bordered responsive style={{ fontSize: "15px" }}>
+            <thead>
+              <tr>
+                <th> Sender Account</th>
+                <th> Reciver Account</th>
+                <th>Amount </th>
+                <th>Type</th>
+                <th>message</th>
+                <th>Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+          {rows.map((item) => (
+            <tr key={item._id}>
+              {/* <TableCell>{item._id}</TableCell> */}
+              <td>{item.senderAccount}</td>
+              <td>{item.receiverAccount}</td>
+              <td>{item.amount}</td>
+              <td>{item.type}</td>
+              <td>{item.message}</td>
+              <td align="right">
+                <IconButton onClick={() => handleDelete(item._id)}>
+                  <DeleteIcon />
+                </IconButton>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+          </Table>
+        </Card>
       <TablePagination
         component="div"
         count={totalRows}
@@ -204,7 +221,6 @@ function TransationDelete() {
         rowsPerPage={rowsPerPage}
         // onRowsPerPageChange={handleChangeRowsPerPage}
       />
-    </Paper>
       </Card>
       {/* <Footer /> */}
     </DashboardLayout>

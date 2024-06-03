@@ -43,6 +43,8 @@ import Footer from "examples/Footer";
 import axios from 'axios';
 import Table from "react-bootstrap/Table";
 import {IconButton} from '@mui/material';
+// import DeleteIcon from '@mui/icons-material/Delete';
+
 
 // import {
 //     Table,
@@ -64,10 +66,10 @@ import {IconButton} from '@mui/material';
 
 // Images
 import curved6 from "assets/images/curved-images/curved-6.jpg";
-import { fetchlogo,deleteLogo} from "assets/globalAPI";
+import { fetchbanner,deleteBanner} from "assets/globalAPI";
 import { Mp } from "@mui/icons-material";
 
-function DeleteLogo() {
+function DeleteBanner() {
  
   const [agreement, setAgremment] = useState(true);
   const toastId = useRef(null);
@@ -86,7 +88,7 @@ function DeleteLogo() {
   const fetchData = async () => {
     try {
       console.log("data fetched");
-      const response = await fetchlogo();
+      const response = await fetchbanner();
       console.log("data fetched111111111111111",response.data);
 
       setData(response.data.result);
@@ -101,7 +103,7 @@ function DeleteLogo() {
     }
     console.log("khgvfc",data);
     try {
-      const respo=await deleteLogo(data)
+      const respo=await deleteBanner(data)
       console.log("data fetched111111111111111",respo.data);
       if (respo.status == 200) {
         Swal.fire({
@@ -129,6 +131,8 @@ function DeleteLogo() {
           <tr>
             {/* <TableCell>ID</TableCell> */}
             <th >Name</th>
+            <th >Event</th>
+            <th >Offer</th>
             <th>Image</th>
             <th>Actions</th>
           </tr>
@@ -137,9 +141,12 @@ function DeleteLogo() {
           {data.map((item) => (
             <tr key={item._id}>
               {/* <TableCell>{item._id}</TableCell> */}
-              <td>{item.name}</td>
+              <td>{item.appName}</td>
+              <td>{item.event}</td>
+              <td>{item.offers}</td>
+
               <td >
-                <img src={`${basepathglobal}${item.filesPath}`} alt={item.name} style={{ width: 220, height: 70 }} />
+                <img src={`${basepathglobal}${item.filesPath}`} alt={item.appName} style={{ width: 220, height: 70 }} />
               </td>
               <td align="right">
                 <IconButton onClick={() => handleDelete(item._id)}>
@@ -150,6 +157,7 @@ function DeleteLogo() {
           ))}
         </tbody>
       </Table>
+    
       </Card>
       {/* <Footer /> */}
     </DashboardLayout>
@@ -158,4 +166,4 @@ function DeleteLogo() {
 
 
 
-export default DeleteLogo;
+export default DeleteBanner;
