@@ -19,29 +19,90 @@ export function addAccount(data) {
   axios.defaults.headers.common["Authorization"] = "Bearer " + token; 
   axios.defaults.headers.post["Content-Type"] = "application/json"; 
   return axios.post("admin/AddAccount",data); 
-;}
+}
 export function transfar(data) { 
   let token = localStorage.getItem("token"); 
   console.log("bhbjhbb",token);
   axios.defaults.headers.common["Authorization"] = "Bearer " + token; 
   axios.defaults.headers.post["Content-Type"] = "application/json"; 
   return axios.post("/user/transaction",data); 
-;}
+}
 export function banner(data) { 
   let token = localStorage.getItem("token"); 
   console.log("bhbjhbb",token);
   axios.defaults.headers.common["Authorization"] = "Bearer " + token; 
   axios.defaults.headers.post["Content-Type"] = "multipart/form-data"; 
   return axios.post("/admin/upload/banner",data); 
-;}
+}
 export function appLogo(data) { 
   let token = localStorage.getItem("token"); 
   console.log("bhbjhbb",token);
   axios.defaults.headers.common["Authorization"] = "Bearer " + token; 
   axios.defaults.headers.post["Content-Type"] = "multipart/form-data"; 
   return axios.post("/admin/upload/logo",data); 
-;}
+}
+export function adminTransation(data) { 
+  let token = localStorage.getItem("token"); 
+  console.log("bhbjhbb",token);
+  axios.defaults.headers.common["Authorization"] = "Bearer " + token; 
+  axios.defaults.headers.post["Content-Type"] = "application/json"; 
+  // axios.defaults.headers.post["Content-Type"] = "multipart/form-data"; 
+  return axios.post("/admin/fetch/transaction",data); 
+}
+export function adminAccount() { 
+  let token = localStorage.getItem("token"); 
+  console.log("bhbjhbb",token);
+  axios.defaults.headers.post["Content-Type"] = "application/json"; 
+  axios.defaults.headers.common["Authorization"] = "Bearer " + token; 
+  // axios.defaults.headers.post["Content-Type"] = "multipart/form-data"; 
+  return axios.post("/admin/fetch/accounts"); 
+}
 
+export function fetchlogo() { 
+  axios.defaults.headers.post["Content-Type"] = "application/json"; 
+  return axios.post("/admin/fetch/logo"); 
+}
+export function deleteLogo(data) { 
+  let token = localStorage.getItem("token"); 
+  console.log("bhbjhbb",token);
+  axios.defaults.headers.common["Authorization"] = "Bearer " + token; 
+  axios.defaults.headers.post["Content-Type"] = "application/json"; 
+  return axios.post("/admin/delete/logo",data); 
+}
+export function fetchbanner() { 
+  axios.defaults.headers.post["Content-Type"] = "application/json"; 
+  return axios.post("/admin/fetch/banner"); 
+}
+export function deleteBanner(data) { 
+  let token = localStorage.getItem("token"); 
+  console.log("bhbjhbb",token);
+  axios.defaults.headers.common["Authorization"] = "Bearer " + token; 
+  axios.defaults.headers.post["Content-Type"] = "application/json"; 
+  return axios.post("/admin/delete/banner",data); 
+}
+export function fetchUser(data) { 
+  let token = localStorage.getItem("token"); 
+  console.log("bhbjhbb",token);
+  axios.defaults.headers.common["Authorization"] = "Bearer " + token; 
+  axios.defaults.headers.post["Content-Type"] = "application/json"; 
+  return axios.post("/admin/fetch/userlist",data); 
+}
+export function deleteUser(data) { 
+  let token = localStorage.getItem("token"); 
+  console.log("bhbjhbb",token);
+  axios.defaults.headers.common["Authorization"] = "Bearer " + token; 
+  axios.defaults.headers.post["Content-Type"] = "application/json"; 
+  return axios.post("/admin/delete/user",data); 
+}
+
+
+// export function fetchTransation(data) { 
+//   let token = localStorage.getItem("token"); 
+//   console.log("bhbjhbb",token);
+//   axios.defaults.headers.common["Authorization"] = "Bearer " + token; 
+//   axios.defaults.headers.post["Content-Type"] = "application/json"; 
+//   return axios.post("/admin/fetch/transaction",data); 
+// }
 export function authDivision(data) {
   return axios.post(api_url, data, {
     headers: {

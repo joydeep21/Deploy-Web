@@ -55,7 +55,7 @@ function AddAccount() {
   const [name, setName] = useState("");
   const [account, setAccount] = useState("");
   const [type, setType] = useState("");
-  const [amount, setAmmount] = useState("");
+  const [amount, setAmmount] = useState(0);
   const navigate = useNavigate();
   const [loader, setLoader] = useState(false);
 
@@ -108,7 +108,7 @@ function AddAccount() {
           });
           setAmmount("");
           setName("");
-          setAccount("");
+          setAccount(0);
           setType("")
           console.log("Data posted successfully===>>>>", data);
           // navigate("/dashboards/default")
@@ -172,7 +172,7 @@ function AddAccount() {
               <SoftInput type="text" value={name} placeholder="AccountNumber" onChange={(event)=> setName(event.target.value) } />
             </SoftBox>
             <SoftBox mb={2}>
-              <SoftInput type="text" value={amount} placeholder="Balance" onChange={(event)=> setAmmount(event.target.value)}/>
+              <SoftInput type="number" value={amount} placeholder="Balance" onChange={(event)=> setAmmount(parseInt(event.target.value))}/>
             </SoftBox><SoftBox mb={2}>
               <SoftInput type="text" value={type} placeholder="AccountType"onChange={(event)=> setType(event.target.value)} />
             </SoftBox>

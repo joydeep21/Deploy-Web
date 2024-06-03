@@ -40,6 +40,7 @@ import Swal from 'sweetalert2';
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import Footer from "examples/Footer";
+// import { Box, FormControlLabel, Radio, RadioGroup } from '@mui/material';
 
 
 
@@ -61,6 +62,8 @@ function AppLogo() {
   const [description, setDescription] = useState('');
   const [types, setTypes] = useState('');
   const [owner, setOwner] = useState('');
+  const [sponcered, setSponcered] = useState(false);
+  const [related, setRelated] = useState('');
   const [selectedFile, setSelectedFile] = useState(null);
   const navigate = useNavigate();
   const [loader, setLoader] = useState(false);
@@ -77,6 +80,9 @@ function AppLogo() {
     setSelectedFile(event.target.files[0]);
   };
 
+  // const handleChange = () => {
+  //   setSponcered((prevSponsored) => !prevSponsored);
+  // };
  
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -102,7 +108,9 @@ function AppLogo() {
         formData.append('reviews', reviews);
         formData.append('description', description);
         formData.append('types', types);
+        // formData.append('sponcered', sponcered);
         formData.append('owner', owner);
+        formData.append('related', related);
 
         // name,rating,downloads,size,reviews,description,types,owner
       try {
@@ -193,10 +201,29 @@ function AppLogo() {
               <SoftInput type="text" value={description} placeholder="Description" onChange={(event)=>setDescription(event.target.value)} />
             </SoftBox> 
             <SoftBox mb={2}>
-              <SoftInput type="text" value={types} placeholder="Types" onChange={handleTypeChange} />
+              <SoftInput type="text" value={types} placeholder="Types"  onChange={(event)=>setTypes((event.target.value).split(','))}/>
             </SoftBox>
+            {/* <SoftBox mb={2}>
+            <RadioGroup value={sponcered.toString()} onChange={handleChange}>
+        <FormControlLabel
+          value="true"
+          control={<Radio />}
+          label="Sponsored"
+          checked={sponcered === true}
+        />
+        <FormControlLabel
+          value="false"
+          control={<Radio />}
+          label="Not Sponsored"
+          checked={sponcered === false}
+        />
+      </RadioGroup>
+            </SoftBox> */}
              <SoftBox mb={2}>
               <SoftInput type="text" value={owner} placeholder="App Owner" onChange={(event)=>setOwner(event.target.value)} />
+            </SoftBox>
+            <SoftBox mb={2}>
+              <SoftInput type="text" value={related} placeholder="App Algo" onChange={(event)=>setRelated(event.target.value)} />
             </SoftBox>
             <SoftBox mb={2}>
               <SoftInput type="file"  placeholder="Select a File"onChange={handleFileChange} />
