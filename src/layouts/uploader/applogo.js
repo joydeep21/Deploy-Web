@@ -40,7 +40,7 @@ import Swal from 'sweetalert2';
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import Footer from "examples/Footer";
-// import { Box, FormControlLabel, Radio, RadioGroup } from '@mui/material';
+import { Box, FormControlLabel, Radio, RadioGroup } from '@mui/material';
 
 
 
@@ -80,13 +80,13 @@ function AppLogo() {
     setSelectedFile(event.target.files[0]);
   };
 
-  // const handleChange = () => {
-  //   setSponcered((prevSponsored) => !prevSponsored);
-  // };
+  const handleChange = () => {
+    setSponcered((prevSponsored) => !prevSponsored);
+  };
  
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log("user details");
+    console.log("user details",sponcered);
     // let userid = document.getElementById("userid").value;
     // let password = document.getElementById("password").value;
     if (name == "" || rating == "" ||downloads==""||!selectedFile) {
@@ -108,7 +108,7 @@ function AppLogo() {
         formData.append('reviews', reviews);
         formData.append('description', description);
         formData.append('types', types);
-        // formData.append('sponcered', sponcered);
+        formData.append('sponcered', sponcered);
         formData.append('owner', owner);
         formData.append('related', related);
 
@@ -203,14 +203,14 @@ function AppLogo() {
             <SoftBox mb={2}>
               <SoftInput type="text" value={types} placeholder="Types"  onChange={(event)=>setTypes((event.target.value).split(','))}/>
             </SoftBox>
-            {/* <SoftBox mb={2}>
+            <SoftBox mb={2}>
             <RadioGroup value={sponcered.toString()} onChange={handleChange}>
         <FormControlLabel
           value="true"
           control={<Radio />}
           label="Sponsored"
           checked={sponcered === true}
-        />
+        /> 
         <FormControlLabel
           value="false"
           control={<Radio />}
@@ -218,7 +218,7 @@ function AppLogo() {
           checked={sponcered === false}
         />
       </RadioGroup>
-            </SoftBox> */}
+            </SoftBox>
              <SoftBox mb={2}>
               <SoftInput type="text" value={owner} placeholder="App Owner" onChange={(event)=>setOwner(event.target.value)} />
             </SoftBox>

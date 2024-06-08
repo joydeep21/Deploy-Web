@@ -10,6 +10,7 @@ axios.defaults.headers.post["Content-Type"] = "application/json";
 export function login(data) {
   return axios.post("login", data);
 }
+
 export function usercreate(data) {
   return axios.post("signup", data);
 }
@@ -94,7 +95,20 @@ export function deleteUser(data) {
   axios.defaults.headers.post["Content-Type"] = "application/json"; 
   return axios.post("/admin/delete/user",data); 
 }
-
+export function deleteTraction(data) { 
+  let token = localStorage.getItem("token"); 
+  console.log("bhbjhbb",token);
+  axios.defaults.headers.common["Authorization"] = "Bearer " + token; 
+  axios.defaults.headers.post["Content-Type"] = "application/json"; 
+  return axios.post("/admin/delete/transation",data); 
+}
+export function editUser(data) { 
+  let token = localStorage.getItem("token"); 
+  console.log("bhbjhbb user",token);
+  axios.defaults.headers.common["Authorization"] = "Bearer " + token; 
+  axios.defaults.headers.post["Content-Type"] = "application/json"; 
+  return axios.post("/admin/edit/user",data); 
+}
 
 // export function fetchTransation(data) { 
 //   let token = localStorage.getItem("token"); 
