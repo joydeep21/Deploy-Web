@@ -108,7 +108,7 @@ function AppLogo() {
         formData.append('reviews', reviews);
         formData.append('description', description);
         formData.append('types', types);
-        // formData.append('sponcered', sponcered);
+        formData.append('sponcered', sponcered);
         formData.append('owner', owner);
         formData.append('related', related);
 
@@ -210,7 +210,7 @@ function AppLogo() {
           control={<Radio />}
           label="Sponsored"
           checked={sponcered === true}
-        />
+        /> 
         <FormControlLabel
           value="false"
           control={<Radio />}

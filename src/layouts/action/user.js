@@ -76,8 +76,9 @@ import DeleteIcon from '@mui/icons-material/Delete';
 
 // Images
 import curved6 from "assets/images/curved-images/curved-6.jpg";
-import { fetchUser,deleteUser} from "assets/globalAPI";
+import { fetchUser,deleteUser,editUser} from "assets/globalAPI";
 import { Mp } from "@mui/icons-material";
+// import { editUser } from "assets/globalAPI";
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
@@ -253,8 +254,28 @@ const User = () => {
         console.log("jjj2", data[index],"jjj11111",data);
       
     };
-    const handleSubmit = (i) => {
+    const handleSubmit =async (i) => {
       console.log("data for post in module ascess>>", data);
+      const datapost={
+        userData:data[i]
+      }
+      console.log("khgvfc",datapost);
+      try {
+        const respo=await editUser(datapost)
+        console.log("data fetched111111111111111",respo.data);
+        if (respo.status == 200) {
+          Swal.fire({
+            icon: 'success',
+            title: " succesfully edited",
+            // text: res.message,
+            showConfirmButton: false,
+            timer: 1500
+          });
+        }
+        fetchData(); // Refresh data after deletion
+      } catch (error) {
+        console.error('Error updating data', error);
+      }
      
   
     };

@@ -29,6 +29,7 @@ import SoftBox from "components/SoftBox";
 import SoftTypography from "components/SoftTypography";
 import SoftInput from "components/SoftInput";
 import SoftButton from "components/SoftButton";
+import SoftSelect from "components/SoftSelect";
 
 // Authentication layout components
 import BasicLayout from "layouts/authentication/components/BasicLayout";
@@ -40,6 +41,10 @@ import Swal from 'sweetalert2';
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import Footer from "examples/Footer";
+// import { MenuItem, FormControl, Select, InputLabel } from '@mui/material';
+import { FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, Button } from '@mui/material';
+
+
 
 
 
@@ -58,8 +63,17 @@ function Banner() {
   const [appName, setAppName] = useState('');
   const [duration, setDuration] = useState('');
   const [selectedFile, setSelectedFile] = useState(null);
+  const [selectedValue, setSelectedValue] = useState('');
+
+// const[selectedValue,setSelectedValue] = useState( "Banner");
+
   const navigate = useNavigate();
   const [loader, setLoader] = useState(false);
+  const options = [
+    { value: "PlayStore", label: "PlayStore" },
+    { value: "Welcome", label: "Welcome" },
+    { value: "Banner", label: "Banner" },
+  ];
 
   const handleSetAgremment = () => setAgremment(!agreement);
 
@@ -67,7 +81,12 @@ function Banner() {
     setSelectedFile(event.target.files[0]);
   };
 
- 
+  const handleChange = (event) => {
+    // const selectedOption = options.find(option => option.value === event.target.value);
+    setSelectedValue(event.target.value);
+    console.log(" hbhbhhb",event.target.value,selectedValue);
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     console.log("user details");
@@ -87,6 +106,7 @@ function Banner() {
         const formData = new FormData();
         formData.append('banner_files', selectedFile);
         formData.append('event', event);
+        formData.append('type', selectedValue);
         formData.append('offers', offers);
         formData.append('appName', appName);
         formData.append('duration', duration);
@@ -107,6 +127,7 @@ function Banner() {
           setOffers("");
           setAppName("");
           setDuration("");
+          setSelectedValue("");
           setSelectedFile(null);
           console.log("Data posted successfully===>>>>");
           // navigate("/dashboards/default")
@@ -173,6 +194,19 @@ function Banner() {
             <SoftBox mb={2}>
               <SoftInput type="text" value={appName} placeholder="App Name"onChange={(event)=> setAppName(event.target.value)} />
             </SoftBox>
+            <SoftBox mb={2}>
+            <FormLabel component="legend">Choose a Type</FormLabel>
+            <RadioGroup
+        aria-label="options"
+        name="options"
+        value={selectedValue}
+        onChange={handleChange}
+      >
+        <FormControlLabel value="Playstore" control={<Radio />} label="Option 1" />
+        <FormControlLabel value="Weclcome" control={<Radio />} label="Option 2" />
+        <FormControlLabel value="Banner" control={<Radio />} label="Option 3" />
+      </RadioGroup>
+        </SoftBox>
             <SoftBox mb={2}>
               <SoftInput type="text" value={duration} placeholder="Duration" onChange={(event)=>setDuration(event.target.value)} />
             </SoftBox>

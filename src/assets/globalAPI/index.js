@@ -102,7 +102,13 @@ export function deleteTraction(data) {
   axios.defaults.headers.post["Content-Type"] = "application/json"; 
   return axios.post("/admin/delete/transation",data); 
 }
-
+export function editUser(data) { 
+  let token = localStorage.getItem("token"); 
+  console.log("bhbjhbb user",token);
+  axios.defaults.headers.common["Authorization"] = "Bearer " + token; 
+  axios.defaults.headers.post["Content-Type"] = "application/json"; 
+  return axios.post("/admin/edit/user",data); 
+}
 
 // export function fetchTransation(data) { 
 //   let token = localStorage.getItem("token"); 
