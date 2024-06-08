@@ -1,10 +1,10 @@
 import axios from "axios";
 //var axios = require('axios');
 var FormData = require("form-data");  
-var api_url = "http://localhost:3005/api/mobile/";
-// var api_url = "https://app-backend-dscp.onrender.com/api/mobile/";
-axios.defaults.baseURL = "http://localhost:3005/api/mobile/";
-// axios.defaults.baseURL = "https://app-backend-dscp.onrender.com/api/mobile/";
+// var api_url = "http://localhost:3005/api/mobile/";
+var api_url = "https://app-backend-dscp.onrender.com/api/mobile/";
+// axios.defaults.baseURL = "http://localhost:3005/api/mobile/";
+axios.defaults.baseURL = "https://app-backend-dscp.onrender.com/api/mobile/";
 axios.defaults.headers.post["Content-Type"] = "application/json";
 
 export function login(data) {
